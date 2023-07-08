@@ -37,6 +37,8 @@ int	check_philo(int ac, char **av, t_data *ph_info)
 	if (!is_empty(av))
 		return (0);
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
+	if (ph_info->nbr_of_ph == 0)
+		return (0);
 	ph_info->t_to_die = ft_atoi(av[2]);
 	ph_info->t_to_eat = ft_atoi(av[3]);
 	ph_info->t_to_sleep = ft_atoi(av[4]);
