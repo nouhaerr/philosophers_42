@@ -34,8 +34,6 @@ int	check_args(char **av)
 
 int	check_philo(int ac, char **av)
 {
-	t_data	*ph_info;
-
 	if (!is_empty(av))
 		return (0);
 	ph_info = (t_data *)malloc(sizeof(t_data) * 5);
