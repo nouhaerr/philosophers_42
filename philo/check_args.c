@@ -32,13 +32,10 @@ int	check_args(char **av)
 	return (1);
 }
 
-int	check_philo(int ac, char **av)
+int	check_philo(int ac, char **av, t_data *ph_info)
 {
 	if (!is_empty(av))
 		return (0);
-	ph_info = (t_data *)malloc(sizeof(t_data) * 5);
-	if (!ph_info)
-		return (printf("Allocation Failed !!\n"));
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
 	ph_info->t_to_die = ft_atoi(av[2]);
 	ph_info->t_to_eat = ft_atoi(av[3]);
