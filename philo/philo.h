@@ -29,7 +29,7 @@ typedef struct s_data
 
 typedef struct s_prog
 {
-	t_data	*philo_inf;
+	struct s_data	philo_inf;
 }	t_prog;
 
 int	_isdigit(int c);
