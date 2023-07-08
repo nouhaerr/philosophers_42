@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/07 16:39:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:48:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef struct s_data
 
 typedef struct s_prog
 {
-	t_data	*philo_inf;
+	t_data			*philo_inf;
+	pthread_mutex_t	mutex;
 }	t_prog;
 
 int	_isdigit(int c);
