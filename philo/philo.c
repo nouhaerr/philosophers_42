@@ -14,9 +14,11 @@
 
 int	main(int ac, char **av)
 {
+    t_data ph_inf;
+
 	if (ac == 5 || ac == 6)
 	{
-		if (!check_args(av) || !check_philo(ac, av))
+		if (!check_args(av) || !check_philo(ac, av, &ph_inf))
 			return (printf("Wrong arguments !!\n"));
 		//should check the return of pthread_create for errors
 	}
