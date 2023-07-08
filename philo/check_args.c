@@ -45,5 +45,7 @@ int	check_philo(int ac, char **av, t_data *ph_info)
 	ph_info->t_of_each_ph_must_eat = 0;
 	if (ac == 6)
 		ph_info->t_of_each_ph_must_eat = ft_atoi(av[5]);
+		if (ph_info->t_of_each_ph_must_eat == 0)
+			return (0);
 	return (1);
 }
