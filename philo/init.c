@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 02:48:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/09 02:49:47 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	init_philo(t_philo *philo, t_data ph_inf)
 	int	i;
 
 	i = 0;
-	// while ()
-	printf("%d\n", philo->philo_inf.nbr_of_ph);
 	while (i < ph_inf.nbr_of_ph)
 	{
 		printf("Thread has started\n");
