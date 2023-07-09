@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 01:36:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/09 02:47:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pthread_t		id;
+	pthread_t		th;
+	int				ph_id;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	r_fork;
-	struct s_data	philo_inf;
+	t_data	philo_inf;
 }	t_philo;
 
 int		_isdigit(int c);
@@ -42,6 +43,6 @@ void	*ft_calloc(size_t count, size_t size);
 int		is_empty(char **av);
 int		check_args(char **av);
 int		check_philo(char **av, t_data *ph_info);
-int		init_philo(t_philo *philo);
+int		init_philo(t_philo *philo, t_data ph_inf);
 
 #endif

@@ -6,13 +6,13 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/09 01:44:07 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/09 02:10:47 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 CFILES = philo.c utils.c check_args.c ft_calloc.c \
 		init.c \
