@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   start_eating.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/09 01:13:00 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 01:16:09 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/07/09 23:40:12 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	is_taking_fork(t_philo *philo)
 {
-	void	*p;
+	pthread_mutex_lock(&philo->r_fork);
+	philo->right = 0;
+	pthread_mutex_unlock(&philo->r_fork);
+	pthread_mutex_lock(&philo->l_fork);
+	philo->left = 0;
+	pthread_mutex_unlock(&philo->l_fork);
+}
 
-	if (size && count >= SIZE_MAX / size)
-		return (NULL);
-	p = malloc(count * size);
-	if (!p)
-		return (NULL);
-	memset(p, 0, count * size);
-	return (p);
+void	is_eating(t_philo *philo)
+{
+	is_taking_fork(philo);
 }

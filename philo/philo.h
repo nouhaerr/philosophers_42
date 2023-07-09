@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 22:57:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:34:32 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_philo
 {
 	pthread_t		th;
 	int				ph_id;
-	pthread_mutex_t	l_fork;
-	pthread_mutex_t	r_fork;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
 	int				left;
 	int				right;
 	long			time_of_last_meal;
@@ -49,7 +49,9 @@ int		is_empty(char **av);
 int		check_args(char **av);
 int		init_data(char **av, t_data *ph_info);
 int		init_philo(t_philo *philo, t_data ph_inf);
-int		start_problem(t_philo *philo);
+int		start_philos(t_philo *philo);
 void	*routine(void *arg);
+void	is_taking_fork(t_philo *philo);
+void	is_eating(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 22:55:54 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:34:20 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 		return (printf("Allocation Failed !!\n"));
 	if (!init_philo(philo, data))
 		return (1);
-	if (!start_problem(philo))
+	if (!start_philos(philo))
 		return (1);
 	//should check the return of pthread_create for errors
 	free(philo);

@@ -1,40 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   start_philos.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 23:01:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:44:14 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	is_taking_fork(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->r_fork);
-	philo->right = 0;
-	pthread_mutex_unlock(&philo->r_fork);
-	pthread_mutex_lock(&philo->l_fork);
-	philo->left = 0;
-	pthread_mutex_unlock(&philo->l_fork);
-}
-
-void	is_eating(t_philo *philo)
-{
-	
-}
-
 void	*routine(void *arg)
 {
-	// (void)arg;
-	t_philo	*philo = (t_philo *)arg;
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
 	while (1)
 	{
-		is_taking_fork(philo);
 		is_eating(philo);
+		// is_sleeping(philo);
+		// is_thinking(philo);
 	}
 	return (NULL);
+}
+
+int	start_philos(t_philo *philo)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo->philo_inf.nbr_of_ph)
+	{
+		printf("Thread %d has started\n", philo[i].ph_id);
+		if (pthread_create(&philo[i].th, NULL, &routine, &philo[i]) != 0)
+		{
+			printf("Failed to create thread\n");
+			return (0);
+		}
+	}
+	i = -1;
+	while (++i < philo->philo_inf.nbr_of_ph)
+	{
+		if (pthread_join(philo[i].th, NULL) != 0)
+			return (0);
+	}
+	return (1);
 }

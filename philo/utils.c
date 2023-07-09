@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:57:21 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/07 16:23:18 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:33:04 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@ int	_isdigit(int c)
 		return (1);
 	else
 		return (0);
-}
-
-int	is_empty(char **av)
-{
-	int	i;
-
-	i = 1;
-	while (av[i])
-	{
-		if (av[i][0] == '\0')
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int	ft_atoi(const char *str)
