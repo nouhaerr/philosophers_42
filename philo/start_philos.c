@@ -17,6 +17,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->ph_id % 2 == 0)
+		sleep(philo->philo_info.t_to_eat);
 	while (1)
 	{
 		is_eating(philo);
@@ -36,7 +38,7 @@ int	start_philos(t_philo *philo)
 		printf("Thread %d has started\n", philo[i].ph_id);
 		if (pthread_create(&philo[i].th, NULL, &routine, &philo[i]) != 0)
 		{
-			printf("Failed to create thread\n");
+			printf("Failed to create philosopher\n");
 			return (0);
 		}
 	}
