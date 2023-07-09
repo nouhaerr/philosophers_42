@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 01:36:19 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/07/09 01:36:22 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	*routine(void)
 {
-    t_data ph_inf;
-	t_philo	*philo;
+	printf("hello\n");
+}
 
-	if (ac != 5 && ac != 6)
+int	init_philo(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->philo_inf.nbr_of_ph)
 	{
-		printf("Invalid number of arguments !!\n");
-		return (0);
+		if (pthread_create(philo[i].id, NULL, &routine, NULL) != 0)
+			return (0);
+		i++;
 	}
-	if (!check_args(av) || !check_philo(av, &ph_inf))
-		return (0);
-	philo = (t_philo *)ft_calloc(ph_inf.nbr_of_ph, sizeof(t_philo));
-	if (!philo)
-		return (printf("Allocation Failed !!\n"));
-	if (!init_philo(philo))
-		return (0);
-		//should check the return of pthread_create for errors
+	return (1);
 }

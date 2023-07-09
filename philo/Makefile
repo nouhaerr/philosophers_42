@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/07 18:50:31 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/09 01:20:18 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
-CFILES = philo.c utils.c check_args.c \
+CFILES = philo.c utils.c check_args.c ft_calloc.c \
 
 OBJ = $(CFILES:.c=.o)
 
