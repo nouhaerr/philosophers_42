@@ -12,6 +12,20 @@
 
 #include "philo.h"
 
+void	ft_usleep(uint64_t to_sleep)
+{
+	long	now;
+	long	after;
+
+	now = ft_gettime();
+	after = now + to_sleep;
+	while (now < after)
+	{
+		usleep(100);
+		now = ft_gettime();
+	}
+}
+
 void	write_status(t_philo *philo, char *action)
 {
 	pthread_mutex_lock(&philo->philo_inf.status);
@@ -22,6 +36,7 @@ void	write_status(t_philo *philo, char *action)
 void	is_sleeping(t_philo *philo)
 {
 	write_status(philo, "is sleeping");
+	ft_usleep(philo->philo_inf.t_to_sleep);
 }
 
 void	is_thinking(t_philo *philo)
@@ -35,7 +50,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->ph_id % 2 == 0)
-		sleep(philo->philo_info.t_to_eat);
+		ft_usleep(philo->philo_inf.t_to_eat);
 	while (1)
 	{
 		is_eating(philo);
