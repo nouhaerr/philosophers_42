@@ -42,7 +42,6 @@ typedef struct s_philo
 
 int		_isdigit(int c);
 int		ft_atoi(const char *str);
-void	*ft_calloc(size_t count, size_t size);
 int		is_empty(char **av);
 int		check_args(char **av);
 int		init_data(char **av, t_data *ph_info);
@@ -51,5 +50,6 @@ int		start_philos(t_philo *philo);
 void	*routine(void *arg);
 void	is_taking_fork(t_philo *philo);
 void	is_eating(t_philo *philo);
+void	write_status(t_philo *philo, char *msg);
 
 #endif
