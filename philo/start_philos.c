@@ -14,9 +14,9 @@
 
 void	write_status(t_philo *philo, char *msg)
 {
-	pthread_mutex_lock(philo->philo_inf.status);
+	pthread_mutex_lock(&philo->philo_inf.status);
 	printf("philo %d %s\n", philo->ph_id, msg);
-	pthread_mutex_unlock(philo->philo_inf.status);
+	pthread_mutex_unlock(&philo->philo_inf.status);
 }
 
 void	is_sleeping(t_philo *philo)
