@@ -12,10 +12,10 @@
 
 #include "philo.h"
 
-void	write_status(t_philo *philo, char *msg)
+void	write_status(t_philo *philo, char *action)
 {
 	pthread_mutex_lock(&philo->philo_inf.status);
-	printf("philo %d %s\n", philo->ph_id, msg);
+	printf("philo %d %s\n", philo->ph_id, action);
 	pthread_mutex_unlock(&philo->philo_inf.status);
 }
 
