@@ -23,9 +23,9 @@ long long	ft_gettime(void)
 void	is_taking_fork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-	write_status(philo, "has taken a fork");
+	write_status(philo, "has taken a fork 🍴");
 	pthread_mutex_lock(philo->l_fork);
-	write_status(philo, "has taken a fork");
+	write_status(philo, "has taken a fork 🍴");
 }
 
 void	put_down_forks(t_philo *philo)
@@ -38,7 +38,7 @@ void	is_eating(t_philo *philo)
 {
 	is_taking_fork(philo);
 	philo->time_of_last_meal = ft_gettime();
-	write_status(philo, "is eating");
+	write_status(philo, "is eating 🍝");
 	sleep(philo->philo_inf.t_to_eat);
 	put_down_forks(philo);
 }
