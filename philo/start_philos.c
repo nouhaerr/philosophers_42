@@ -12,6 +12,23 @@
 
 #include "philo.h"
 
+void	write_status(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(philo->philo_inf.status);
+	printf("philo %d %s\n", philo->ph_id, msg);
+	pthread_mutex_unlock(philo->philo_inf.status);
+}
+
+void	is_sleeping(t_philo *philo)
+{
+	write_status(philo, "is sleeping");
+}
+
+void	is_thinking(t_philo *philo)
+{
+	write_status(philo, "is thinking");
+}
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -22,8 +39,8 @@ void	*routine(void *arg)
 	while (1)
 	{
 		is_eating(philo);
-		// is_sleeping(philo);
-		// is_thinking(philo);
+		is_sleeping(philo);
+		is_thinking(philo);
 	}
 	return (NULL);
 }
