@@ -26,7 +26,7 @@ int	init_data(char **av, t_data *ph_info)
 	if (!is_empty(av))
 		return (0);
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
-	if (ph_info->nbr_of_ph == 0)
+	if (ph_info->nbr_of_ph < 1)
 		return (0);
 	ph_info->t_to_die = ft_atoi(av[2]);
 	ph_info->t_to_eat = ft_atoi(av[3]);
@@ -38,6 +38,10 @@ int	init_data(char **av, t_data *ph_info)
 		if (ph_info->t_of_each_ph_must_eat == 0)
 			return (0);
 	}
+	if (ph_info->t_to_die < 1 || ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
+		|| ph_info->t_of_each_ph_must_eat < 0)
+		return (0);
+	//check with long numbers for atoi
 	if (init_mutex(&ph_info))
 		return (0);
 	return (1);
