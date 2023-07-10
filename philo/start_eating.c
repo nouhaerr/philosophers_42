@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+long long	ft_gettime(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
 void	is_taking_fork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
@@ -29,7 +37,8 @@ void	put_down_forks(t_philo *philo)
 void	is_eating(t_philo *philo)
 {
 	is_taking_fork(philo);
-	gettimeofday(&philo->time_of_last_meal, NULL);
+	philo->time_of_last_meal = ft_gettime();
 	write_status(philo, "is eating");
+	sleep(philo->philo_inf.t_to_eat);
 	put_down_forks(philo);
 }
