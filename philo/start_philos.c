@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 16:02:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:42:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_usleep(uint64_t to_sleep)
 void	write_status(t_philo *philo, char *action)
 {
 	pthread_mutex_lock(&philo->philo_inf.status);
-	printf("Philosopher %d %s\n", philo->ph_id, action);
+	printf("ms Philosopher %d %s\n", philo->ph_id, action);
 	pthread_mutex_unlock(&philo->philo_inf.status);
 }
 
@@ -49,8 +49,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->ph_id % 2 == 0)
-		ft_usleep(philo->philo_inf.t_to_eat);
+	// if (philo->ph_id % 2 == 0)
+	// 	ft_usleep(philo->philo_inf.t_to_eat);
 	while (1)
 	{
 		is_eating(philo);
@@ -73,11 +73,7 @@ int	start_philos(t_philo *philo)
 			printf("Failed to create philosopher\n");
 			return (0);
 		}
-	}
-	i = -1;
-	while (++i < philo->philo_inf.nbr_of_ph)
-	{
-		if (pthread_join(philo[i].tid, NULL) != 0)
+		if (pthread_detach(philo[i].tid) != 0)
 			return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 16:07:18 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:27:31 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,18 @@ typedef struct s_philo
 	t_data			philo_inf;
 }	t_philo;
 
-int		_isdigit(int c);
-int		ft_atoi(const char *str);
-int		is_empty(char **av);
-int		check_args(char **av);
-int		init_data(char **av, t_data *ph_info);
-int		init_philo(t_philo *philo, t_data ph_inf);
-int		start_philos(t_philo *philo);
-void	*routine(void *arg);
-void	take_forks(t_philo *philo);
-void	is_eating(t_philo *philo);
-void	write_status(t_philo *philo, char *action);
-void	ft_usleep(uint64_t to_sleep);
+int			_isdigit(int c);
+int			ft_atoi(const char *str);
+int			is_empty(char **av);
+int			check_args(char **av);
+int			init_data(char **av, t_data *ph_info);
+int			init_philo(t_philo *philo, t_data ph_inf);
+int			start_philos(t_philo *philo);
+void		*routine(void *arg);
+void		take_forks(t_philo *philo);
+void		is_eating(t_philo *philo);
+void		write_status(t_philo *philo, char *action);
+void		ft_usleep(uint64_t to_sleep);
+long long	ft_gettime(void);
 
 #endif
