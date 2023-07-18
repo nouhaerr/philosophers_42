@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 15:43:38 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:54:34 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_philo
 	int				ph_id;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	int				left;
-	int				right;
 	long			time_of_last_meal;
 	t_data			philo_inf;
 }	t_philo;
