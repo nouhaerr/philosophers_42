@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 15:58:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:04:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-	philo->right = 0;
-	print_status(philo, "has taken a fork 🍽️");
+	philo->right = 1;
+	write_status(philo, "takes a fork 🍽️");
 	pthread_mutex_lock(philo->l_fork);
-	philo->left = 0;
-	print_status(philo, "has taken a fork 🍽️");
+	philo->left = 1;
+	write_status(philo, "takes a fork 🍽️");
 }
 
 long long	ft_gettime(void)

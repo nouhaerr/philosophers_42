@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 15:56:20 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:02:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	write_status(t_philo *philo, char *action)
 
 void	is_sleeping(t_philo *philo)
 {
-	print_status(philo, "is sleeping 💤");
+	write_status(philo, "is sleeping 💤");
 	ft_usleep(philo->philo_inf.t_to_sleep);
 }
 
 void	is_thinking(t_philo *philo)
 {
-	print_status(philo, "is thinking 💭");
+	write_status(philo, "is thinking 💭");
 }
 
 void	*routine(void *arg)
