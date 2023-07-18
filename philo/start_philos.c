@@ -6,37 +6,28 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 19:45:01 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:17:09 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(uint64_t to_sleep)
+long long	time_stamp(long long time_start)
 {
-	long	now;
-	long	after;
-
-	now = ft_gettime();
-	after = now + to_sleep;
-	while (now < after)
-	{
-		usleep(100);
-		now = ft_gettime();
-	}
+	return (ft_gettime() - time_start);
 }
 
 void	write_status(t_philo *philo, char *action)
 {
 	pthread_mutex_lock(&philo->philo_inf.status);
-	printf("ms Philosopher %d %s\n", philo->ph_id, action);
+	printf("%lld ms Philosopher %d %s\n", time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
 	pthread_mutex_unlock(&philo->philo_inf.status);
 }
 
 void	is_sleeping(t_philo *philo)
 {
 	write_status(philo, "is sleeping 💤");
-	ft_usleep(philo->philo_inf.t_to_sleep);
+	usleep(philo->philo_inf.t_to_sleep * 1000);
 }
 
 void	is_thinking(t_philo *philo)
@@ -49,8 +40,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	// if (philo->ph_id % 2 == 0)
-	// 	ft_usleep(philo->philo_inf.t_to_eat);
+	if (philo->ph_id % 2 == 0)
+		usleep(philo->philo_inf.t_to_eat * 1000);
 	while (1)
 	{
 		is_eating(philo);

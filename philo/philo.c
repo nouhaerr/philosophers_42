@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/18 16:36:22 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:03:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (!start_philos(philo))
 		return (1);
+	while (1) ;
 	// //should check the return of pthread_create for errors
 	free(philo);
 	return (0);
