@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 00:17:09 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 00:30:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	start_philos(t_philo *philo)
 	i = -1;
 	while (++i < philo->philo_inf.nbr_of_ph)
 	{
-		// printf("Thread %d has started\n", philo[i].ph_id);
 		if (pthread_create(&philo[i].tid, NULL, &routine, &philo[i]) != 0)
 		{
 			printf("Failed to create philosopher\n");
