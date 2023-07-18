@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 23:31:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:48:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_data(char **av, t_data *ph_info)
 	if (!is_empty(av))
 		return (0);
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
-	if (ph_info->nbr_of_ph == 0)
+	if (ph_info->nbr_of_ph < 1)
 		return (0);
 	ph_info->t_to_die = ft_atoi(av[2]);
 	ph_info->t_to_eat = ft_atoi(av[3]);
@@ -38,7 +38,10 @@ int	init_data(char **av, t_data *ph_info)
 		if (ph_info->t_of_each_ph_must_eat == 0)
 			return (0);
 	}
-	if (init_mutex(&ph_info))
+	if (ph_info->t_to_die < 1 || ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
+		|| ph_info->t_of_each_ph_must_eat < 0)
+		return (0);
+	if (init_mutex(ph_info))
 		return (0);
 	return (1);
 }
@@ -55,7 +58,6 @@ int	init_philo(t_philo *philo, t_data data)
 		philo[i].ph_id = i + 1;
 		philo[i].r_fork = &data.forks[i];
 		philo[i].l_fork = &data.forks[(i + 1) % data.nbr_of_ph];
-		printf("HERE\n");
 		i++;
 	}
 	return (1);

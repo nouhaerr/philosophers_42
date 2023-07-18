@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:53:42 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 23:33:08 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:46:25 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	check_args(char **av)
 	while (av[i])
 	{
 		j = 0;
+		if (av[i][j] == '-' || av[i][j] == '+')
+			j++;
 		while (av[i][j])
 		{
-			if (!_isdigit(av[i][j])) // check if the space is an error or not
+			if (!_isdigit(av[i][j]))
 				return (0);
 			j++;
 		}

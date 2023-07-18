@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/09 23:34:32 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:43:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_data
 {
@@ -32,7 +33,7 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pthread_t		th;
+	pthread_t		tid;
 	int				ph_id;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
@@ -44,14 +45,14 @@ typedef struct s_philo
 
 int		_isdigit(int c);
 int		ft_atoi(const char *str);
-void	*ft_calloc(size_t count, size_t size);
 int		is_empty(char **av);
 int		check_args(char **av);
 int		init_data(char **av, t_data *ph_info);
 int		init_philo(t_philo *philo, t_data ph_inf);
 int		start_philos(t_philo *philo);
 void	*routine(void *arg);
-void	is_taking_fork(t_philo *philo);
+void	take_forks(t_philo *philo);
 void	is_eating(t_philo *philo);
+void	print_status(t_philo *philo, char *stat);
 
 #endif
