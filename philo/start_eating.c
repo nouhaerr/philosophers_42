@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 15:13:24 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:34:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	is_eating(t_philo *philo)
 	take_forks(philo);
 	philo->time_of_last_meal = ft_gettime();
 	write_status(philo, "is eating 🍝");
-	usleep(philo->philo_inf.t_to_eat * 1000);
+	ft_usleep(philo->philo_inf.t_to_eat * 1000);
 	if (philo->left + philo->right == 2)
 		philo->count_meals++;
 	put_down_forks(philo);
