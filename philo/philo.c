@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 17:39:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:22:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	check_die(t_philo *philo)
 	i = -1;
 	while (++i < philo->philo_inf.nbr_of_ph)
 	{
-		time = ft_gettime() - philo->time_of_last_meal;
-		if (time >= philo->philo_inf.t_to_die)
+		time = ft_gettime() - philo[i].time_of_last_meal;
+		if (time >= philo[i].philo_inf.t_to_die)
 		{
 			write_status(philo, "died ☠️");
 			return (1);
