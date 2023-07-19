@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 00:19:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:13:24 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ void	take_forks(t_philo *philo)
 	pthread_mutex_lock(philo->l_fork);
 	philo->left = 1;
 	write_status(philo, "has taken a fork 🍽️");
-}
-
-long long	ft_gettime(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 void	put_down_forks(t_philo *philo)

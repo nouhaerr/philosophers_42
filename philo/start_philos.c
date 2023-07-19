@@ -6,16 +6,11 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 00:30:01 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:13:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-long long	time_stamp(long long time_start)
-{
-	return (ft_gettime() - time_start);
-}
 
 void	write_status(t_philo *philo, char *action)
 {

@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/18 22:48:20 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/19 15:14:29 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 
 CFILES = philo.c utils.c check_args.c \
 		init.c start_philos.c start_eating.c \
-
+		utils_time.c
+	
 OBJ = $(CFILES:.c=.o)
 
 NAME = philo
