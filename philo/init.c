@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 00:22:04 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:27:17 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	init_mutex(t_data *data)
 	if (!data->forks)
 		return (printf("Allocation Failed !!\n"));
 	pthread_mutex_init(&data->status, NULL);
+	pthread_mutex_init(&data->meals, NULL);
+	// pthread_mutex_init(&data->die, NULL);
 	return (0);
 }
 
@@ -32,6 +34,7 @@ int	init_data(char **av, t_data *ph_info)
 	ph_info->t_to_eat = ft_atoi(av[3]);
 	ph_info->t_to_sleep = ft_atoi(av[4]);
 	ph_info->t_of_each_ph_must_eat = 0;
+	ph_info->count_meals = 0;
 	if (av[5])
 	{
 		ph_info->t_of_each_ph_must_eat = ft_atoi(av[5]);
@@ -52,15 +55,14 @@ int	init_philo(t_philo *philo, t_data data)
 	int	i;
 
 	i = 0;
+	// philo->meals = (pthread_t)malloc(sizeof(pthread_t));
 	while (i < data.nbr_of_ph)
 	{
 		if (pthread_mutex_init(&data.forks[i], NULL) != 0)
 			return (0);
 		philo[i].philo_inf = data;
 		philo[i].ph_id = i + 1;
-		philo[i].count_meals = 0;
-		philo[i].left = 0;
-		philo[i].right = 0;
+		philo[i].time_of_last_meal = ft_gettime();
 		philo[i].r_fork = &data.forks[i];
 		philo[i].l_fork = &data.forks[(i + 1) % data.nbr_of_ph];
 		i++;

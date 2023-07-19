@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 15:34:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:58:06 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 
 void	write_status(t_philo *philo, char *action)
 {
-	pthread_mutex_lock(&philo->philo_inf.status);
-	printf("%lld ms Philosopher %d %s\n", time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
-	pthread_mutex_unlock(&philo->philo_inf.status);
+	if (*action == 'd')
+	{
+		pthread_mutex_lock(&philo->philo_inf.status);
+		printf("%lld ms Philosopher %d %s\n",
+			time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->philo_inf.status);
+		printf("%lld ms Philosopher %d %s\n",
+			time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
+		pthread_mutex_unlock(&philo->philo_inf.status);
+	}
 }
 
 void	is_sleeping(t_philo *philo)
 {
 	write_status(philo, "is sleeping 💤");
-	ft_usleep(philo->philo_inf.t_to_sleep * 1000);
+	ft_usleep(philo->philo_inf.t_to_sleep);
 }
 
 void	is_thinking(t_philo *philo)
@@ -36,13 +46,17 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->ph_id % 2 == 0)
-		ft_usleep(philo->philo_inf.t_to_eat * 1000);
+		ft_usleep(40);
 	while (1)
 	{
-		is_eating(philo);
+		if (!is_eating(philo))
+			break ;
 		is_sleeping(philo);
 		is_thinking(philo);
 	}
+	pthread_mutex_lock(&philo->philo_inf.meals);
+	philo->philo_inf.count_meals++;
+	pthread_mutex_unlock(&philo->philo_inf.meals);
 	return (NULL);
 }
 

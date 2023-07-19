@@ -6,34 +6,41 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 15:17:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:39:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_die(t_philo *philo)
+int	check_die(t_philo *philo)
 {
-	int			i;
 	long long	time;
+	int			i;
 
 	time = 0;
+	i = -1;
+	while (++i < philo->philo_inf.nbr_of_ph)
+	{
+		time = ft_gettime() - philo->time_of_last_meal;
+		if (time >= philo->philo_inf.t_to_die)
+		{
+			write_status(philo, "died ☠️");
+			return (1);
+		}
+	}
+	pthread_mutex_lock(&philo->philo_inf.meals);
+	if (philo->philo_inf.nbr_of_ph == philo->philo_inf.count_meals)
+		return (1);
+	pthread_mutex_unlock(&philo->philo_inf.meals);
+	return (0);
+}
+
+void	philo_wait(t_philo *philo)
+{
 	while (1)
 	{
-		i = -1;
-		while (++i < philo->philo_inf.nbr_of_ph)
-		{
-			time = ft_gettime() - philo->time_of_last_meal;
-			if (time > philo->philo_inf.t_to_die)
-			{
-				pthread_mutex_lock(&philo->philo_inf.status);
-				printf("%lld ms Philosopher %d died ☠️\n", time_stamp(philo->philo_inf.start_time), philo->ph_id);
-				return ;
-			}
-			else if (philo->philo_inf.t_of_each_ph_must_eat != 0 
-				&& philo->philo_inf.t_of_each_ph_must_eat == philo->count_meals)
-				return ;
-		}
+		if (check_die(philo))
+			break ;
 	}
 }
 
@@ -53,7 +60,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (!start_philos(philo))
 		return (1);
-	check_die(philo);
+	philo_wait(philo);
 	free(philo);
 	return (0);
 }
