@@ -27,7 +27,7 @@ void	check_die(t_philo *philo)
 			if (time > philo->philo_inf.t_to_die)
 			{
 				pthread_mutex_lock(&philo->philo_inf.status);
-				printf("%lld ms Philosopher %d died\n", time_stamp(philo->philo_inf.start_time), philo->ph_id);
+				printf("%lld ms Philosopher %d died ☠️\n", time_stamp(philo->philo_inf.start_time), philo->ph_id);
 				return ;
 			}
 			else if (philo->philo_inf.t_of_each_ph_must_eat != 0 
