@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:33:36 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:22:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 void	write_status(t_philo *philo, char *action)
 {
-	if (*action == 'd')
+	pthread_mutex_lock(&philo->philo_inf.status);
+	printf("%lld ms %d %s\n",
+		time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
+	if (*action != 'd')
 	{
-		pthread_mutex_lock(&philo->philo_inf.status);
-		printf("%lld ms %d %s\n",
-			time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
-	}
-	else
-	{
-		pthread_mutex_lock(&philo->philo_inf.status);
-		printf("%lld ms %d %s\n",
-			time_stamp(philo->philo_inf.start_time), philo->ph_id, action);
 		pthread_mutex_unlock(&philo->philo_inf.status);
 	}
 }
@@ -55,7 +49,7 @@ void	*routine(void *arg)
 		is_thinking(philo);
 	}
 	pthread_mutex_lock(philo->meals);
-	*(philo->count_meals)++;
+	(*(philo->count_meals))++;
 	pthread_mutex_unlock(philo->meals);
 	return (NULL);
 }

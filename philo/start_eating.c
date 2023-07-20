@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:25:04 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:16:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	put_down_forks(t_philo *philo)
 int	is_eating(t_philo *philo)
 {
 	take_forks(philo);
+	pthread_mutex_lock(&philo->philo_inf.die_lock);
 	philo->time_of_last_meal = ft_gettime();
+	pthread_mutex_unlock(&philo->philo_inf.die_lock);
 	write_status(philo, "is eating 🍝");
 	ft_usleep(philo->philo_inf.t_to_eat);
 	put_down_forks(philo);

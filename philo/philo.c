@@ -6,24 +6,24 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:39:15 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:58:24 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	destroy_info(t_data *info)
+void	destroy_info(t_data info)
 {
 	int	i;
 
 	i = -1;
-	while (++i < info->nbr_of_ph)
+	while (++i < info.nbr_of_ph)
 	{
-		pthread_mutex_destroy(&info->forks[i]);
+		pthread_mutex_destroy(&info.forks[i]);
 	}
-	pthread_mutex_destroy(&info->status);
-	pthread_mutex_destroy(&info->die);
-	free(info->forks);
+	pthread_mutex_destroy(&info.status);
+	pthread_mutex_destroy(&info.die_lock);
+	free(info.forks);
 }
 
 void	destroy_philo(t_philo *philo)
@@ -34,43 +34,52 @@ void	destroy_philo(t_philo *philo)
 	free(philo);
 }
 
-int	check_die(t_philo *philo)
-{
-	long long	time;
-	int			i;
+// int	check_die(t_philo *philo)
+// {
+// 	int			i;
 
-	time = 0;
-	i = -1;
-	while (++i < philo->philo_inf.nbr_of_ph)
-	{
-		pthread_mutex_lock(&philo->philo_inf.die);
-		time = ft_gettime() - philo[i].time_of_last_meal;
-		if (time >= philo[i].philo_inf.t_to_die)
-		{
-			write_status(&philo[i], "died ☠️");
-			destroy_info(&philo->philo_inf);
-			destroy_philo(philo);
-			return (1);
-		}
-		pthread_mutex_unlock(&philo->philo_inf.die);
-	}
-	return (0);
-}
+// i = -1;
+	// while (++i < philo->philo_inf.nbr_of_ph)
+	// {
+	// 	pthread_mutex_lock(&philo->philo_inf.die_lock);
+	// 	if (ft_gettime() - philo->time_of_last_meal >= philo->philo_inf.t_to_die)
+	// 	{
+	// 		write_status(&philo[i], "died ☠️");
+	// 		pthread_mutex_unlock(&philo->philo_inf.die_lock);
+	// 		// destroy_info(philo->philo_inf);
+	// 		// destroy_philo(philo);
+	// 		return (1);
+	// 	}
+	// 	pthread_mutex_unlock(&philo->philo_inf.die_lock);
+	// }
+// }
 
 int	philo_wait(t_philo *philo)
 {
+	int			i;
+
 	while (1)
 	{
-		// pthread_mutex_lock(philo->die);
-		// if (*(philo->die) == 0)
-		// 	break ;
-		// pthread_mutex_unlock(philo->die);
-		if (check_die(philo))
-			return (1);
-		usleep(50);
+		i = -1;
+		while (++i < philo->philo_inf.nbr_of_ph)
+		{
+			pthread_mutex_lock(&philo->philo_inf.die_lock);
+			if (ft_gettime() - philo->time_of_last_meal >= philo->philo_inf.t_to_die)
+			{
+				write_status(&philo[i], "died ☠️");
+				destroy_info(philo->philo_inf);
+				destroy_philo(philo);
+				return (1);
+			}
+			pthread_mutex_unlock(&philo->philo_inf.die_lock);
+		}
+		usleep(100);
 		pthread_mutex_lock(philo->meals);
 		if (*(philo->count_meals) == philo->philo_inf.nbr_of_ph)
-			return (1) ;
+		{
+			pthread_mutex_unlock(philo->meals);
+			return (1);
+		}
 		pthread_mutex_unlock(philo->meals);
 	}
 	return (0);

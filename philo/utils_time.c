@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:13:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:23:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:13:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,15 @@ void	ft_usleep(long long time_sleep)
 		now = ft_gettime();
 	}
 }
+
+// i = 0;
+// while i < ohilonum
+// {
+// 	waitp(-1, &sta)
+// 	if (st != 0)
+// 		while(i < philo)
+// 		{
+// 			kill()
+// 		}
+// 	i++;
+// }

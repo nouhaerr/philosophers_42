@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:34:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:43:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_data
 	long long		t_to_sleep;
 	long long		start_time;
 	int				t_of_each_ph_must_eat;
+	pthread_mutex_t	die_lock;
 	pthread_mutex_t	status;
-	pthread_mutex_t	die;
 	pthread_mutex_t	*forks;
 }	t_data;
 
@@ -41,12 +41,14 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	int				*count_meals;
 	pthread_mutex_t	*meals;
+	// pthread_mutex_t	*die_lock;
+	// int				*die;
 	long long		time_of_last_meal;
 	t_data			philo_inf;
 }	t_philo;
 
 int			_isdigit(int c);
-int			ft_atoi(const char *str);
+long		ft_atol(const char *str);
 int			is_empty(char **av);
 int			check_args(char **av);
 int			init_data(char **av, t_data *ph_info);
