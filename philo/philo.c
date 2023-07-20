@@ -12,6 +12,27 @@
 
 #include "philo.h"
 
+void	destroy_ph_info(t_data ph_inf)
+{
+	int	i;
+
+	i = -1;
+	while (++i < ph_inf.nbr_of_philo)
+	{
+		pthread_mutex_destroy(&ph_inf->forks[i]);
+	}
+	pthread_mutex_destroy(&ph_inf->status);
+	pthread_mutex_destroy(&ph_inf->die);
+	free(ph_inf->forks);
+}
+
+void	destroy_philo(t_philo *philo)
+{
+	pthread_mutex_destroy(philo[0]->meals);
+	free(philo->meals);
+	free(philo);
+}
+
 void	check_die(t_philo *philo)
 {
 	long long	time;
@@ -21,31 +42,37 @@ void	check_die(t_philo *philo)
 	i = -1;
 	while (++i < philo->philo_inf.nbr_of_ph)
 	{
+		pthread_mutex_lock(philo->philo_inf.die);
 		time = ft_gettime() - philo[i].time_of_last_meal;
 		if (time >= philo[i].philo_inf.t_to_die)
-		{
-			// pthread_mutex_lock(philo->die);
-			// *(philo->die) = 0; 
-			write_status(philo, "died ☠️");
-			// pthread_mutex_unlock(philo->die);
+		{ 
+			write_status(philo[i], "died ☠️");
+			destroy_ph_info(philo->philo_inf);
+			destroy_philo(philo);
+			return (1);
 		}
+		pthread_mutex_unlock(philo->philo_inf.die);
 	}
+	return (0);
 }
 
 void	philo_wait(t_philo *philo)
 {
 	while (1)
 	{
+		if (check_die(philo))
+			return (1);
 		// pthread_mutex_lock(philo->die);
 		// if (*(philo->die) == 0)
 		// 	break ;
 		// pthread_mutex_unlock(philo->die);
 		pthread_mutex_lock(philo->meals);
 		if (philo->philo_inf.nbr_of_ph == *(philo->count_meals))
-			break ;
+			return (1) ;
 		pthread_mutex_unlock(philo->meals);
 		usleep(50);
 	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -64,7 +91,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (!start_philos(philo))
 		return (1);
-	philo_wait(philo);
-	free(philo);
+	if (philo_wait(philo))
+		return (1);
 	return (0);
 }
