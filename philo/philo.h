@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 18:43:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:21:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	int				*count_meals;
 	pthread_mutex_t	*meals;
-	// pthread_mutex_t	*die_lock;
-	// int				*die;
 	long long		time_of_last_meal;
 	t_data			philo_inf;
 }	t_philo;

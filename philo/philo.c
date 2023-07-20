@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 20:58:24 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:22:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,33 @@ void	destroy_philo(t_philo *philo)
 	free(philo);
 }
 
-// int	check_die(t_philo *philo)
-// {
-// 	int			i;
+int	check_die(t_philo *philo)
+{
+	int	i;
 
-// i = -1;
-	// while (++i < philo->philo_inf.nbr_of_ph)
-	// {
-	// 	pthread_mutex_lock(&philo->philo_inf.die_lock);
-	// 	if (ft_gettime() - philo->time_of_last_meal >= philo->philo_inf.t_to_die)
-	// 	{
-	// 		write_status(&philo[i], "died ☠️");
-	// 		pthread_mutex_unlock(&philo->philo_inf.die_lock);
-	// 		// destroy_info(philo->philo_inf);
-	// 		// destroy_philo(philo);
-	// 		return (1);
-	// 	}
-	// 	pthread_mutex_unlock(&philo->philo_inf.die_lock);
-	// }
-// }
+	i = -1;
+	while (++i < philo->philo_inf.nbr_of_ph)
+	{
+		pthread_mutex_lock(&philo->philo_inf.die_lock);
+		if (ft_gettime() - philo->time_of_last_meal
+			>= philo->philo_inf.t_to_die)
+		{
+			write_status(&philo[i], "died ☠️");
+			destroy_info(philo->philo_inf);
+			destroy_philo(philo);
+			return (1);
+		}
+		pthread_mutex_unlock(&philo->philo_inf.die_lock);
+	}
+	return (0);
+}
 
 int	philo_wait(t_philo *philo)
 {
-	int			i;
-
 	while (1)
 	{
-		i = -1;
-		while (++i < philo->philo_inf.nbr_of_ph)
-		{
-			pthread_mutex_lock(&philo->philo_inf.die_lock);
-			if (ft_gettime() - philo->time_of_last_meal >= philo->philo_inf.t_to_die)
-			{
-				write_status(&philo[i], "died ☠️");
-				destroy_info(philo->philo_inf);
-				destroy_philo(philo);
-				return (1);
-			}
-			pthread_mutex_unlock(&philo->philo_inf.die_lock);
-		}
+		if (check_die(philo))
+			return (1);
 		usleep(100);
 		pthread_mutex_lock(philo->meals);
 		if (*(philo->count_meals) == philo->philo_inf.nbr_of_ph)
@@ -87,7 +75,7 @@ int	philo_wait(t_philo *philo)
 
 int	main(int ac, char **av)
 {
-    t_data data;
+	t_data	data;
 	t_philo	*philo;
 
 	if (ac != 5 && ac != 6)
