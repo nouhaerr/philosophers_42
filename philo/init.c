@@ -18,7 +18,7 @@ int	init_mutex(t_data *data)
 	if (!data->forks)
 		return (printf("Allocation Failed !!\n"));
 	pthread_mutex_init(&data->status, NULL);
-	// pthread_mutex_init(&data->die, NULL);
+	pthread_mutex_init(&data->die, NULL);
 	return (0);
 }
 
@@ -29,9 +29,9 @@ int	init_data(char **av, t_data *ph_info)
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
 	if (ph_info->nbr_of_ph < 1)
 		return (0);
-	ph_info->t_to_die = ft_atoi(av[2]);
-	ph_info->t_to_eat = ft_atoi(av[3]);
-	ph_info->t_to_sleep = ft_atoi(av[4]);
+	ph_info->t_to_die = ft_atoi(av[2]); // check if < 60
+	ph_info->t_to_eat = ft_atoi(av[3]); // check if < 60 return 1;
+	ph_info->t_to_sleep = ft_atoi(av[4]); // check if < 60
 	ph_info->t_of_each_ph_must_eat = 0;
 	if (av[5])
 	{
