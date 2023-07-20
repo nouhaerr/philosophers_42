@@ -51,21 +51,21 @@ int	init_philo(t_philo *philo, t_data data)
 	int	i;
 
 	i = 0;
-	philo->meals = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data.nbr_of_ph);
-	philo->count_meals = (int *)malloc(sizeof(int) * data.nbr_of_ph);
+	philo->meals = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	philo->count_meals = (int *)malloc(sizeof(int));
 	if (!philo->meals || !philo->count_meals)
 		return (printf("Allocation Failed !!\n"));
-	philo->count_meals[0] = 0;
+	*(philo->count_meals) = 0;
 	while (i < data.nbr_of_ph)
 	{
 		if (pthread_mutex_init(&data.forks[i], NULL) != 0)
 			return (1);
-		pthread_mutex_init(&philo->meals[i], NULL);
+		pthread_mutex_init(&philo[i]->meals, NULL);
 		philo[i].philo_inf = data;
 		philo[i].ph_id = i + 1;
 		philo[i].time_of_last_meal = ft_gettime();
 		philo[i].meals = philo->meals;
-		philo[i].count_meals = &philo->count_meals[0];
+		philo[i].count_meals = philo->count_meals; //All philo share the same meal count
 		philo[i].r_fork = &data.forks[i];
 		philo[i].l_fork = &data.forks[(i + 1) % data.nbr_of_ph];
 		i++;
