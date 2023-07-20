@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 19:23:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 01:13:02 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	check_die(t_philo *philo)
 			return (1);
 		}
 	}
-	pthread_mutex_lock(&philo->philo_inf.meals);
-	if (philo->philo_inf.nbr_of_ph == philo->philo_inf.count_meals)
+	pthread_mutex_lock(philo->meals);
+	if (philo->philo_inf.nbr_of_ph == *(philo->count_meals))
 		return (1);
-	pthread_mutex_unlock(&philo->philo_inf.meals);
+	pthread_mutex_unlock(philo->meals);
 	return (0);
 }
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 	philo = (t_philo *)malloc(data.nbr_of_ph * sizeof(t_philo));
 	if (!philo)
 		return (printf("Allocation Failed !!\n"));
-	if (!init_philo(philo, data))
+	if (init_philo(philo, data))
 		return (1);
 	if (!start_philos(philo))
 		return (1);
