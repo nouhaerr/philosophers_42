@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 02:00:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:25:17 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ typedef struct s_data
 {
 	int				nbr_of_ph;
 	int				t_to_die;
-	int				t_to_eat;
-	int				t_to_sleep;
+	long long		t_to_eat;
+	long long		t_to_sleep;
 	long long		start_time;
 	int				t_of_each_ph_must_eat;
 	pthread_mutex_t	status;
+	pthread_mutex_t	die;
 	pthread_mutex_t	*forks;
 }	t_data;
 
@@ -40,8 +41,6 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	int				*count_meals;
 	pthread_mutex_t	*meals;
-	// int				*die;
-	// pthread_mutex_t	*die;
 	long long		time_of_last_meal;
 	t_data			philo_inf;
 }	t_philo;
@@ -59,6 +58,6 @@ int			is_eating(t_philo *philo);
 void		write_status(t_philo *philo, char *action);
 long long	ft_gettime(void);
 long long	time_stamp(long long time_start);
-void		ft_usleep(uint64_t to_sleep);
+void		ft_usleep(long long time_sleep);
 
 #endif

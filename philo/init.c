@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 01:13:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:10:34 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_mutex(t_data *data)
 	if (!data->forks)
 		return (printf("Allocation Failed !!\n"));
 	pthread_mutex_init(&data->status, NULL);
-	// pthread_mutex_init(&data->die, NULL);
+	pthread_mutex_init(&data->die, NULL);
 	return (0);
 }
 
@@ -27,8 +27,6 @@ int	init_data(char **av, t_data *ph_info)
 	if (!is_empty(av))
 		return (0);
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
-	if (ph_info->nbr_of_ph < 1)
-		return (0);
 	ph_info->t_to_die = ft_atoi(av[2]);
 	ph_info->t_to_eat = ft_atoi(av[3]);
 	ph_info->t_to_sleep = ft_atoi(av[4]);
@@ -39,8 +37,8 @@ int	init_data(char **av, t_data *ph_info)
 		if (ph_info->t_of_each_ph_must_eat == 0)
 			return (0);
 	}
-	if (ph_info->t_to_die < 1 || ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
-		|| ph_info->t_of_each_ph_must_eat < 0)
+	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 1 || ph_info->t_to_eat < 1
+		|| ph_info->t_to_sleep < 1 || ph_info->t_of_each_ph_must_eat < 0)
 		return (0);
 	if (init_mutex(ph_info))
 		return (0);
@@ -58,7 +56,7 @@ int	init_philo(t_philo *philo, t_data data)
 	if (!philo->meals || !philo->count_meals)
 		return (printf("Allocation Failed !!\n"));
 	pthread_mutex_init(philo->meals, NULL);
-	philo->count_meals[0] = 0;
+	*(philo->count_meals) = 0;
 	while (i < data.nbr_of_ph)
 	{
 		if (pthread_mutex_init(&data.forks[i], NULL) != 0)

@@ -6,13 +6,35 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 01:59:39 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:29:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_die(t_philo *philo)
+void	destroy_info(t_data *info)
+{
+	int	i;
+
+	i = -1;
+	while (++i < info->nbr_of_ph)
+	{
+		pthread_mutex_destroy(&info->forks[i]);
+	}
+	pthread_mutex_destroy(&info->die);
+	pthread_mutex_destroy(&info->status);
+	free(info->forks);
+	free(info);
+}
+
+void	destroy_philo(t_philo *philo)
+{
+	pthread_mutex_destroy(philo->meals);
+	free(philo->count_meals);
+	free(philo);
+}
+
+int	check_die(t_philo *philo)
 {
 	long long	time;
 	int			i;
@@ -21,18 +43,21 @@ void	check_die(t_philo *philo)
 	i = -1;
 	while (++i < philo->philo_inf.nbr_of_ph)
 	{
+		pthread_mutex_lock(&philo->philo_inf.die);
 		time = ft_gettime() - philo[i].time_of_last_meal;
 		if (time >= philo[i].philo_inf.t_to_die)
 		{
-			// pthread_mutex_lock(philo->die);
-			// *(philo->die) = 0; 
 			write_status(philo, "died ☠️");
-			// pthread_mutex_unlock(philo->die);
+			destroy_info(&philo->philo_inf);
+			destroy_philo(philo);
+			return (1);
 		}
+		pthread_mutex_unlock(&philo->philo_inf.die);
 	}
+	return (0);
 }
 
-void	philo_wait(t_philo *philo)
+int	philo_wait(t_philo *philo)
 {
 	while (1)
 	{
@@ -40,12 +65,15 @@ void	philo_wait(t_philo *philo)
 		// if (*(philo->die) == 0)
 		// 	break ;
 		// pthread_mutex_unlock(philo->die);
-		pthread_mutex_lock(philo->meals);
-		if (philo->philo_inf.nbr_of_ph == *(philo->count_meals))
-			break ;
-		pthread_mutex_unlock(philo->meals);
+		if (check_die(philo))
+			return (1);
 		usleep(50);
+		pthread_mutex_lock(philo->meals);
+		if (*(philo->count_meals) == philo->philo_inf.nbr_of_ph)
+			return (1) ;
+		pthread_mutex_unlock(philo->meals);
 	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -62,9 +90,9 @@ int	main(int ac, char **av)
 		return (printf("Allocation Failed !!\n"));
 	if (init_philo(philo, data))
 		return (1);
-	if (!start_philos(philo))
+	if (start_philos(philo))
 		return (1);
-	philo_wait(philo);
-	free(philo);
+	if (philo_wait(philo))
+		return (1);
 	return (0);
 }

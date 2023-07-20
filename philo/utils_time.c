@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:13:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 15:31:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:23:06 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ long long	time_stamp(long long time_start)
 	return (ft_gettime() - time_start);
 }
 
-void	ft_usleep(uint64_t time_sleep)
+void	ft_usleep(long long time_sleep)
 {
 	long long	now;
 	long long	after;
