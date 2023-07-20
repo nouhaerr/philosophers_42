@@ -89,7 +89,7 @@ int	main(int ac, char **av)
 		return (printf("Allocation Failed !!\n"));
 	if (init_philo(philo, data))
 		return (1);
-	if (!start_philos(philo))
+	if (start_philos(philo))
 		return (1);
 	if (philo_wait(philo))
 		return (1);
