@@ -23,7 +23,7 @@
 typedef struct s_data
 {
 	int				nbr_of_ph;
-	int				t_to_die;
+	long				t_to_die;
 	int				t_to_eat;
 	int				t_to_sleep;
 	long long		start_time;
