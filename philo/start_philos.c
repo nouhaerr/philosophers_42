@@ -46,7 +46,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->ph_id % 2 == 0)
-		ft_usleep(40);
+		ft_usleep(philo->philo_inf.t_to_eat);
 	while (1)
 	{
 		if (!is_eating(philo))
