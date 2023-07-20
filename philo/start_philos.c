@@ -55,7 +55,7 @@ void	*routine(void *arg)
 		is_thinking(philo);
 	}
 	pthread_mutex_lock(philo->meals);
-	philo->count_meals++;
+	*(philo->count_meals)++;
 	pthread_mutex_unlock(philo->meals);
 	return (NULL);
 }
@@ -68,12 +68,9 @@ int	start_philos(t_philo *philo)
 	while (++i < philo->philo_inf.nbr_of_ph)
 	{
 		if (pthread_create(&philo[i].tid, NULL, &routine, &philo[i]) != 0)
-		{
-			printf("Failed to create philosopher\n");
-			return (0);
-		}
+			return (1);
 		if (pthread_detach(philo[i].tid) != 0)
-			return (0);
+			return (1);
 	}
-	return (1);
+	return (0);
 }
