@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 01:15:14 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 01:16:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	*routine(void *arg)
 	}
 	pthread_mutex_lock(philo->meals);
 	philo->count_meals++;
-	pthread_mutex_unlock(philomeals);
+	pthread_mutex_unlock(philo->meals);
 	return (NULL);
 }
 
