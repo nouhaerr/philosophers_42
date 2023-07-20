@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/19 18:58:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 01:15:14 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	*routine(void *arg)
 		is_sleeping(philo);
 		is_thinking(philo);
 	}
-	pthread_mutex_lock(&philo->philo_inf.meals);
-	philo->philo_inf.count_meals++;
-	pthread_mutex_unlock(&philo->philo_inf.meals);
+	pthread_mutex_lock(philo->meals);
+	philo->count_meals++;
+	pthread_mutex_unlock(philomeals);
 	return (NULL);
 }
 
