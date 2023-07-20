@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:10:34 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:40:31 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	init_data(char **av, t_data *ph_info)
 	if (!is_empty(av))
 		return (0);
 	ph_info->nbr_of_ph = ft_atoi(av[1]);
-	ph_info->t_to_die = ft_atoi(av[2]);
-	ph_info->t_to_eat = ft_atoi(av[3]);
-	ph_info->t_to_sleep = ft_atoi(av[4]);
+	ph_info->t_to_die = ft_atoi(av[2]); // check if < 60
+	ph_info->t_to_eat = ft_atoi(av[3]); // check if < 60 return 1;
+	ph_info->t_to_sleep = ft_atoi(av[4]); // check if < 60
 	ph_info->t_of_each_ph_must_eat = 0;
 	if (av[5])
 	{
@@ -65,7 +65,7 @@ int	init_philo(t_philo *philo, t_data data)
 		philo[i].ph_id = i + 1;
 		philo[i].time_of_last_meal = ft_gettime();
 		philo[i].meals = philo->meals;
-		philo[i].count_meals = philo[0].count_meals;
+		philo[i].count_meals = philo->count_meals; //All philo share the same meal count
 		philo[i].r_fork = &data.forks[i];
 		philo[i].l_fork = &data.forks[(i + 1) % data.nbr_of_ph];
 		i++;

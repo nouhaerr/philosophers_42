@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:31:43 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:33:36 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*routine(void *arg)
 		is_thinking(philo);
 	}
 	pthread_mutex_lock(philo->meals);
-	philo->count_meals++;
+	*(philo->count_meals)++;
 	pthread_mutex_unlock(philo->meals);
 	return (NULL);
 }
@@ -68,10 +68,7 @@ int	start_philos(t_philo *philo)
 	while (++i < philo->philo_inf.nbr_of_ph)
 	{
 		if (pthread_create(&philo[i].tid, NULL, &routine, &philo[i]) != 0)
-		{
-			printf("Failed to create philosopher\n");
 			return (1);
-		}
 		if (pthread_detach(philo[i].tid) != 0)
 			return (1);
 	}

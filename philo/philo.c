@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:29:55 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:39:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	destroy_info(t_data *info)
 	{
 		pthread_mutex_destroy(&info->forks[i]);
 	}
-	pthread_mutex_destroy(&info->die);
 	pthread_mutex_destroy(&info->status);
+	pthread_mutex_destroy(&info->die);
 	free(info->forks);
-	free(info);
 }
 
 void	destroy_philo(t_philo *philo)
 {
-	pthread_mutex_destroy(philo->meals);
+	pthread_mutex_destroy(philo[0].meals);
+	free(philo->meals);
 	free(philo->count_meals);
 	free(philo);
 }
@@ -47,7 +47,7 @@ int	check_die(t_philo *philo)
 		time = ft_gettime() - philo[i].time_of_last_meal;
 		if (time >= philo[i].philo_inf.t_to_die)
 		{
-			write_status(philo, "died ☠️");
+			write_status(&philo[i], "died ☠️");
 			destroy_info(&philo->philo_inf);
 			destroy_philo(philo);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 17:25:17 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:34:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_data
 {
 	int				nbr_of_ph;
-	int				t_to_die;
+	long			t_to_die;
 	long long		t_to_eat;
 	long long		t_to_sleep;
 	long long		start_time;
