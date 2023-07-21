@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 21:52:59 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 23:40:08 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:55:32 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	philo_wait(t_philo *philo)
 		if (status != 0)
 		{
 			i = 0;
-			while(i < philo->philo_inf.nbr_of_ph)
+			while (i < philo->philo_inf.nbr_of_ph)
 			{
-				kill(philo[i].pid, SIGTERM);
+				kill(philo[i].pid, SIGKILL);
 				i++;
 			}
 			break ;

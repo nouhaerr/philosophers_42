@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:50:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 22:50:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:12:13 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <semaphore.h>
-#include <sys/types.h>
-#include <signal.h>
+# include <sys/types.h>
+# include <signal.h>
 
 typedef struct s_data
 {

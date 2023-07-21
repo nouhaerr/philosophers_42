@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 23:29:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:51:56 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	*check_die(void *args)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)args;
 	while (1)
 	{
-		sem_wait(philo->philo_inf.check_die);	
+		sem_wait(philo->philo_inf.check_die);
 		if (time_stamp((philo->time_of_last_meal.tv_sec * 1000)
-			+ (philo->time_of_last_meal.tv_usec / 1000))
-				>= philo->philo_inf.t_to_die)
+				+ (philo->time_of_last_meal.tv_usec / 1000))
+			>= philo->philo_inf.t_to_die)
 		{
 			write_status(philo, "died");
 			exit(EXIT_FAILURE);

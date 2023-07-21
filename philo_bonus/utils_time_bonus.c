@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:13:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 18:41:08 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:09:08 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long long	ft_converttime(struct timeval time_now)
 
 long long	time_stamp(long long time_stamp)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return (ft_converttime(time) - time_stamp);
@@ -27,7 +27,7 @@ long long	time_stamp(long long time_stamp)
 
 long long	ft_gettime(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
