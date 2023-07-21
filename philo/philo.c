@@ -64,10 +64,7 @@ int	philo_wait(t_philo *philo)
 		usleep(100);
 		pthread_mutex_lock(philo->meals);
 		if (*(philo->count_meals) == philo->philo_inf.nbr_of_ph)
-		{
-			pthread_mutex_unlock(philo->meals);
 			return (1);
-		}
 		pthread_mutex_unlock(philo->meals);
 	}
 	return (0);
