@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_philos.c                                     :+:      :+:    :+:   */
+/*   start_philos_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 19:49:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/21 23:29:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 void	*check_die(void *args)
 {
 	t_philo *philo;
-	int		i;
 
 	philo = (t_philo *)args;
-	i = -1;
-	if (time_stamp((philo->philo_inf.start_time.tv_sec * 1000)
-		+ (philo->philo_inf.start_time.tv_usec / 1000)) >= philo->philo_inf.t_to_die)
+	while (1)
 	{
-		write_status(philo, "died");
-		exit(EXIT_FAILURE);
+		sem_wait(philo->philo_inf.check_die);	
+		if (time_stamp((philo->time_of_last_meal.tv_sec * 1000)
+			+ (philo->time_of_last_meal.tv_usec / 1000))
+				>= philo->philo_inf.t_to_die)
+		{
+			write_status(philo, "died");
+			exit(EXIT_FAILURE);
+		}
+		sem_post(philo->philo_inf.check_die);
+		usleep(100);
 	}
 }
 
 void	philo_routine(t_philo *philo)
 {
+	gettimeofday(&philo->time_of_last_meal, NULL);
 	if (pthread_create(&philo->tid, NULL, &check_die, philo) != 0)
 		exit(1);
 	if (pthread_detach(philo->tid) != 0)
@@ -49,8 +55,7 @@ void	philo_routine(t_philo *philo)
 	sem_close(philo->philo_inf.ph_forks);
 	sem_close(philo->philo_inf.status);
 	sem_close(philo->philo_inf.check_die);
-	free(philo);
-	exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }
 
 void	start_philos(t_philo *philo, t_data data)
@@ -65,6 +70,7 @@ void	start_philos(t_philo *philo, t_data data)
 			exit(1);
 		if (philo[i].pid == 0)
 		{
+			philo[i].forks = data.ph_forks;
 			philo[i].philo_inf = data;
 			philo[i].ph_id = i + 1;
 			gettimeofday(&philo->time_of_last_meal, NULL);

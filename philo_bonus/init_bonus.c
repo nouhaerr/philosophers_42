@@ -6,13 +6,13 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 19:34:29 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/21 22:50:33 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	init_mutex(t_data *data)
+void	init_sem(t_data *data)
 {
 	sem_unlink("/forks");
 	sem_unlink("/status");
