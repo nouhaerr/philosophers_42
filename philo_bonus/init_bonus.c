@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/21 22:50:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:24:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	init_data(char **av, t_data *ph_info)
 		if (ph_info->t_of_each_ph_must_eat == 0)
 			exit(EXIT_FAILURE);
 	}
-	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 60
-		|| ph_info->t_to_eat < 60 || ph_info->t_to_sleep < 60
+	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 1
+		|| ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
 		|| ph_info->t_of_each_ph_must_eat < 0)
 		exit(EXIT_FAILURE);
 	init_sem(ph_info);

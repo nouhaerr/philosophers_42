@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/22 00:51:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:48:10 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*check_die(void *args)
 			>= philo->philo_inf.t_to_die)
 		{
 			write_status(philo, "died");
-			exit(EXIT_FAILURE);
+			exit(2);
 		}
 		sem_post(philo->philo_inf.check_die);
 		usleep(100);
@@ -39,8 +39,8 @@ void	philo_routine(t_philo *philo)
 		exit(1);
 	if (pthread_detach(philo->tid) != 0)
 		exit(1);
-	if (philo->ph_id % 2 == 0)
-		ft_usleep(philo->philo_inf.t_to_eat);
+	// if (philo->ph_id % 2 == 0)
+	// 	ft_usleep(philo->philo_inf.t_to_eat);
 	gettimeofday(&philo->time_of_last_meal, NULL);
 	while (1)
 	{
@@ -55,7 +55,7 @@ void	philo_routine(t_philo *philo)
 	sem_close(philo->philo_inf.ph_forks);
 	sem_close(philo->philo_inf.status);
 	sem_close(philo->philo_inf.check_die);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	start_philos(t_philo *philo, t_data data)
@@ -73,8 +73,6 @@ void	start_philos(t_philo *philo, t_data data)
 			philo[i].forks = data.ph_forks;
 			philo[i].philo_inf = data;
 			philo[i].ph_id = i + 1;
-			gettimeofday(&philo->time_of_last_meal, NULL);
-			philo[i].forks = data.ph_forks;
 			philo_routine(&philo[i]);
 		}
 	}
