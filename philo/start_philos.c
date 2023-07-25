@@ -31,13 +31,13 @@ void	write_status(t_philo *philo, char *action)
 
 void	is_sleeping(t_philo *philo)
 {
-	write_status(philo, "is sleeping 💤");
+	write_status(philo, "is sleeping");
 	ft_usleep(philo->philo_inf.t_to_sleep);
 }
 
 void	is_thinking(t_philo *philo)
 {
-	write_status(philo, "is thinking 💭");
+	write_status(philo, "is thinking");
 }
 
 void	*routine(void *arg)
