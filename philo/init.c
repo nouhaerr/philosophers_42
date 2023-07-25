@@ -46,8 +46,8 @@ int	init_data(char **av, t_data *ph_info)
 		if (ph_info->t_of_each_ph_must_eat == 0)
 			return (0);
 	}
-	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 60
-		|| ph_info->t_to_eat < 60 || ph_info->t_to_sleep < 60
+	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 1
+		|| ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
 		|| ph_info->t_of_each_ph_must_eat < 0)
 		return (0);
 	if (init_mutex(ph_info))
