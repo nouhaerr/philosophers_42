@@ -45,7 +45,7 @@ int	check_die(t_philo *philo)
 		if (ft_gettime() - philo->time_of_last_meal
 			>= philo->philo_inf.t_to_die)
 		{
-			write_status(&philo[i], "died ☠️");
+			write_status(&philo[i], "died");
 			destroy_info(philo->philo_inf);
 			destroy_philo(philo);
 			return (1);
