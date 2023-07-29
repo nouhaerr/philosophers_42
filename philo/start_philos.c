@@ -42,15 +42,16 @@ void	*routine(void *arg)
 		ft_usleep(philo->philo_inf->t_to_eat);
 	while (1)
 	{
+		is_eating(philo);
 		pthread_mutex_lock(philo->meals);
 		if (philo->philo_inf->t_of_each_ph_must_eat != 0
 			&& philo->count_meals == philo->philo_inf->t_of_each_ph_must_eat)
 		{
-			philo->full++;
+				philo->full++;
+				return (NULL);
 			// printf("PHILO %d, nbr of MEALS: %d, full: %d\n", philo->ph_id, philo->count_meals, philo->full);
 		}
 		pthread_mutex_unlock(philo->meals);
-		is_eating(philo);
 		is_thinking(philo);
 		is_sleeping(philo);
 	}
