@@ -6,13 +6,13 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/20 21:57:01 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/29 01:42:56 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 
 CFILES = philo.c utils.c check_args.c \
 		init.c start_philos.c start_eating.c \
@@ -23,17 +23,15 @@ OBJ = $(CFILES:.c=.o)
 NAME = philo
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) -lpthread $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJ) -o $(NAME)
 
 all : $(NAME)
 
 clean :
-	@rm -rf $(OBJ)
-	@echo "\033[1;31m- Object files removed!\033[0m"
+	rm -rf $(OBJ)
 
 fclean : clean
-	@rm -rf $(NAME)
-	@echo "\033[1;31m all clean\033[0;0m"
+	rm -rf $(NAME)
 
 re : fclean all
 

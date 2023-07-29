@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/20 21:16:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 01:08:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,25 @@
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-	write_status(philo, "has taken a fork 🍽️");
+	write_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->l_fork);
-	write_status(philo, "has taken a fork 🍽️");
+	write_status(philo, "has taken a fork");
 }
 
 void	put_down_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
 }
 
-int	is_eating(t_philo *philo)
+void	is_eating(t_philo *philo)
 {
 	take_forks(philo);
-	pthread_mutex_lock(&philo->philo_inf.die_lock);
-	philo->time_of_last_meal = ft_gettime();
-	pthread_mutex_unlock(&philo->philo_inf.die_lock);
-	write_status(philo, "is eating 🍝");
-	ft_usleep(philo->philo_inf.t_to_eat);
+	gettimeofday(&philo->time_of_last_meal, NULL);
+	write_status(philo, "is eating");
+	ft_usleep(philo->philo_inf->t_to_eat);
+	pthread_mutex_lock(philo->meals);
+	philo->count_meals++;
+	pthread_mutex_unlock(philo->meals);
 	put_down_forks(philo);
-	if (philo->philo_inf.t_of_each_ph_must_eat != 0)
-	{
-		philo->philo_inf.t_of_each_ph_must_eat--;
-		if (philo->philo_inf.t_of_each_ph_must_eat == 0)
-			return (0);
-	}
-	return (1);
 }
