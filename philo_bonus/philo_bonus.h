@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:50:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/28 16:46:52 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:41:58 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_data
 	long long		t_to_eat;
 	long long		t_to_sleep;
 	struct timeval	start_time;
-	int				t_of_each_ph_must_eat;
 	sem_t			*ph_forks;
 	sem_t			*status;
 	sem_t			*check_die;
@@ -41,9 +40,11 @@ typedef struct s_philo
 	pthread_t		tid;
 	pid_t			pid;
 	int				ph_id;
+	int				count_meals;
+	int				t_of_each_ph_must_eat;
 	struct timeval	time_of_last_meal;
 	sem_t			*forks;
-	t_data			philo_inf;
+	t_data			*philo_inf;
 }	t_philo;
 
 int			_isdigit(int c);
@@ -51,10 +52,10 @@ long		ft_atol(const char *str);
 int			is_empty(char **av);
 int			check_args(char **av);
 void		init_data(char **av, t_data *ph_info);
-void		start_philos(t_philo *philo, t_data data);
+void		start_philos(char **av, t_philo *philo, t_data *data);
 void		*routine(void *arg);
 void		take_forks(t_philo *philo);
-int			is_eating(t_philo *philo);
+void		is_eating(t_philo *philo);
 void		is_sleeping(t_philo *philo);
 void		is_thinking(t_philo *philo);
 void		write_status(t_philo *philo, char *action);

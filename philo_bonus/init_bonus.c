@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/24 22:24:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:33:58 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,8 @@ void	init_data(char **av, t_data *ph_info)
 	ph_info->t_to_die = ft_atol(av[2]);
 	ph_info->t_to_eat = ft_atol(av[3]);
 	ph_info->t_to_sleep = ft_atol(av[4]);
-	ph_info->t_of_each_ph_must_eat = 0;
-	if (av[5])
-	{
-		ph_info->t_of_each_ph_must_eat = ft_atol(av[5]);
-		if (ph_info->t_of_each_ph_must_eat == 0)
-			exit(EXIT_FAILURE);
-	}
 	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 1
-		|| ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
-		|| ph_info->t_of_each_ph_must_eat < 0)
+		|| ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1)
 		exit(EXIT_FAILURE);
 	init_sem(ph_info);
 	gettimeofday(&ph_info->start_time, NULL);

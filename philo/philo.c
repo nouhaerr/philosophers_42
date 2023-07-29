@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 01:50:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:30:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	destroy_info(t_data *info)
 	pthread_mutex_destroy(&info->status);
 	pthread_mutex_destroy(&info->die_lock);
 	free(info->forks);
+	free(info);
 }
 
 void	destroy_philo(t_philo *philo)
@@ -31,7 +32,6 @@ void	destroy_philo(t_philo *philo)
 	pthread_mutex_destroy(philo[0].meals);
 	free(philo->meals);
 	free(philo);
-
 }
 
 int	check_full_eat(t_philo *philo)
@@ -93,6 +93,8 @@ int	main(int ac, char **av)
 	if (ac != 5 && ac != 6)
 		return (printf("Invalid number of arguments !!\n"));
 	data = (t_data *)malloc(sizeof(t_data));
+	if (!data)
+		return (printf("Allocation Failed !!\n"));
 	if (!check_args(av) || !init_data(av, data))
 		return (printf("Wrong Arguments !!\n"));
 	philo = (t_philo *)malloc(data->nbr_of_ph * sizeof(t_philo));

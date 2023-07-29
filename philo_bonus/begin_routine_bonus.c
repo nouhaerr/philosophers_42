@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:01:22 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/22 00:11:24 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:10:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ void	write_status(t_philo *philo, char *action)
 {
 	if (*action == 'd')
 	{
-		sem_wait(philo->philo_inf.status);
+		sem_wait(philo->philo_inf->status);
 		printf("%lld ms %d %s\n",
-			time_stamp((philo->philo_inf.start_time.tv_sec * 1000)
-				+ (philo->philo_inf.start_time.tv_usec / 1000)), \
+			time_stamp((philo->philo_inf->start_time.tv_sec * 1000)
+				+ (philo->philo_inf->start_time.tv_usec / 1000)), \
 				philo->ph_id, action);
 	}
 	else
 	{
-		sem_wait(philo->philo_inf.status);
+		sem_wait(philo->philo_inf->status);
 		printf("%lld ms %d %s\n",
-			time_stamp((philo->philo_inf.start_time.tv_sec * 1000)
-				+ (philo->philo_inf.start_time.tv_usec / 1000)), \
+			time_stamp((philo->philo_inf->start_time.tv_sec * 1000)
+				+ (philo->philo_inf->start_time.tv_usec / 1000)), \
 				philo->ph_id, action);
-		sem_post(philo->philo_inf.status);
+		sem_post(philo->philo_inf->status);
 	}
 }
 
 void	is_sleeping(t_philo *philo)
 {
 	write_status(philo, "is sleeping");
-	ft_usleep(philo->philo_inf.t_to_sleep);
+	ft_usleep(philo->philo_inf->t_to_sleep);
 }
 
 void	is_thinking(t_philo *philo)

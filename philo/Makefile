@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/29 01:42:56 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/29 01:57:33 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(CFILES:.c=.o)
 NAME = philo
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS)  $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 all : $(NAME)
 

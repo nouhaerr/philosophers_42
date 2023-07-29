@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/29 01:48:54 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/29 02:44:27 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(CFILES:.c=.o)
 NAME = philo_bonus
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) -lpthread $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 all : $(NAME)
 
