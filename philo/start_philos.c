@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 01:50:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:57:13 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*routine(void *arg)
 			&& philo->count_meals == philo->philo_inf->t_of_each_ph_must_eat)
 		{
 			philo->full++;
-			printf("PHILO %d, nbr of MEALS: %d, full: %d\n", philo->ph_id, philo->count_meals, philo->full);
+			// printf("PHILO %d, nbr of MEALS: %d, full: %d\n", philo->ph_id, philo->count_meals, philo->full);
 		}
 		pthread_mutex_unlock(philo->meals);
 		is_eating(philo);

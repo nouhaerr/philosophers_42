@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 15:13:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/28 17:11:05 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:57:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ long long	ft_gettime(void)
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
-
-// long long	time_stamp(long long time_start)
-// {
-// 	return (ft_gettime() - time_start);
-// }
 
 void	ft_usleep(long long time_sleep)
 {

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 02:41:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:55:52 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	is_eating(t_philo *philo)
 	take_forks(philo);
 	gettimeofday(&philo->time_of_last_meal, NULL);
 	sem_wait(philo->philo_inf->check_die);
-	// if (philo->t_of_each_ph_must_eat != 0)
 	philo->t_of_each_ph_must_eat--;
 	sem_post(philo->philo_inf->check_die);
 	write_status(philo, "is eating");

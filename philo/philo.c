@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 02:30:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/29 02:56:25 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	check_full_eat(t_philo *philo)
 	if	(x == philo->philo_inf->nbr_of_ph)
 	{
 		pthread_mutex_lock(&philo->philo_inf->status);
-		// printf("ok %d\n", x);
 		return (1);
 	}
 	return (0);
