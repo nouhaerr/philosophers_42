@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:45:51 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 01:08:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:49:29 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		take_forks(t_philo *philo);
 void		is_eating(t_philo *philo);
 void		write_status(t_philo *philo, char *action);
 long long	ft_gettime(void);
-// long long	time_stamp(long long time_start);
 void		ft_usleep(long long time_sleep);
 long long	time_stamp(long long time_stamp);
 

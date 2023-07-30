@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:11:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 01:53:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:52:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	is_eating(t_philo *philo)
 	gettimeofday(&philo->time_of_last_meal, NULL);
 	write_status(philo, "is eating");
 	ft_usleep(philo->philo_inf->t_to_eat);
-	pthread_mutex_lock(philo->meals);
 	philo->count_meals++;
-	pthread_mutex_unlock(philo->meals);
 	put_down_forks(philo);
 }

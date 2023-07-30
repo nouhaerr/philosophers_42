@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 02:21:14 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 03:13:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	init_mutex(t_data *data)
 		malloc(sizeof(pthread_mutex_t) * data->nbr_of_ph);
 	if (!data->forks)
 		return (printf("Allocation Failed !!\n"));
-	// while (++i < data->nbr_of_ph)
-	// {
-	// 	if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-	// 		return (1);
-	// }
+	while (++i < data->nbr_of_ph)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+			return (1);
+	}
 	pthread_mutex_init(&data->status, NULL);
 	pthread_mutex_init(&data->die_lock, NULL);
 	return (0);
@@ -43,12 +43,11 @@ int	init_data(char **av, t_data *ph_info)
 	if (av[5])
 	{
 		ph_info->t_of_each_ph_must_eat = ft_atol(av[5]);
-		if (ph_info->t_of_each_ph_must_eat == 0)
+		if (ph_info->t_of_each_ph_must_eat < 1)
 			return (0);
 	}
 	if (ph_info->nbr_of_ph < 1 || ph_info->t_to_die < 1
-		|| ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1
-		|| ph_info->t_of_each_ph_must_eat < 0)
+		|| ph_info->t_to_eat < 1 || ph_info->t_to_sleep < 1)
 		return (0);
 	if (init_mutex(ph_info))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 02:57:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:59:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ void	*routine(void *arg)
 		ft_usleep(philo->philo_inf->t_to_eat);
 	while (1)
 	{
+		is_eating(philo);
 		pthread_mutex_lock(philo->meals);
 		if (philo->philo_inf->t_of_each_ph_must_eat != 0
 			&& philo->count_meals == philo->philo_inf->t_of_each_ph_must_eat)
-		{
 			philo->full++;
-			// printf("PHILO %d, nbr of MEALS: %d, full: %d\n", philo->ph_id, philo->count_meals, philo->full);
-		}
 		pthread_mutex_unlock(philo->meals);
-		is_eating(philo);
-		is_thinking(philo);
 		is_sleeping(philo);
+		is_thinking(philo);
 	}
 	return (NULL);
 }
@@ -68,6 +65,7 @@ int	start_philos(t_philo *philo)
 			return (1);
 		if (pthread_detach(philo[i].tid) != 0)
 			return (1);
+		usleep(50);
 	}
 	return (0);
 }

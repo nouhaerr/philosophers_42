@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 22:50:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/29 02:41:58 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 03:16:39 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_philo
 	pthread_t		tid;
 	pid_t			pid;
 	int				ph_id;
-	int				count_meals;
 	int				t_of_each_ph_must_eat;
 	struct timeval	time_of_last_meal;
 	sem_t			*forks;

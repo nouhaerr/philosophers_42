@@ -6,13 +6,13 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/07 16:04:25 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/07/29 02:44:27 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/07/30 03:16:33 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3
+CFLAGS = -Wall -Wextra -Werror
 
 CFILES = philo_bonus.c utils_bonus.c check_args_bonus.c \
 		init_bonus.c start_philos_bonus.c start_eating_bonus.c \
