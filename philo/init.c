@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:06:16 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/30 03:24:39 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 03:57:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,9 @@ int	init_philo(t_philo *philo, t_data *data)
 	pthread_mutex_init(philo->meals, NULL);
 	while (++i < data->nbr_of_ph)
 	{
-		// pthread_mutex_init(&data->forks[i], NULL);
 		philo[i].philo_inf = data;
 		philo[i].ph_id = i + 1;
-		gettimeofday(&philo->time_of_last_meal, NULL);
+		gettimeofday(&philo[i].time_of_last_meal, NULL);
 		philo[i].meals = philo->meals;
 		philo[i].count_meals = 0;
 		philo[i].r_fork = &data->forks[i];

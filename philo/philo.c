@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/30 02:47:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/30 03:58:30 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	check_death(t_philo *philo)
 	while (++i < philo->philo_inf->nbr_of_ph)
 	{
 		pthread_mutex_lock(&philo->philo_inf->die_lock);
-		if (time_stamp((philo->time_of_last_meal.tv_sec * 1000)
-				+ (philo->time_of_last_meal.tv_usec / 1000))
+		if (time_stamp((philo[i].time_of_last_meal.tv_sec * 1000)
+				+ (philo[i].time_of_last_meal.tv_usec / 1000))
 			>= philo->philo_inf->t_to_die)
 		{
 			pthread_mutex_lock(&philo->philo_inf->status);
