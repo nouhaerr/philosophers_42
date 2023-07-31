@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:57:21 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/30 02:38:38 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:13:12 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ long	ft_atol(const char *str)
 		nbr = nbr * 10 + (str[i] - '0');
 		i++;
 	}
-	if ((signe < 0 && nbr >= 2147483648) || (signe > 0 && nbr >= 2147483647))
+	if ((signe < 0 && nbr >= 2147483648) || (signe > 0 && nbr > 2147483647))
 		return (0);
 	return (nbr * signe);
 }
