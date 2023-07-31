@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 15:49:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/31 21:09:24 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/07/31 23:34:05 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	check_full_eat(t_philo *philo)
 	x = 0;
 	while (++i < philo->philo_inf->nbr_of_ph)
 	{
-		pthread_mutex_lock(philo->meals);
+		pthread_mutex_lock(&philo->philo_inf->die_lock);
 		if (philo[i].full == 1)
 			x++;
-		pthread_mutex_unlock(philo->meals);
+		pthread_mutex_unlock(&philo->philo_inf->die_lock);
 	}
 	if (x == philo->philo_inf->nbr_of_ph)
 	{

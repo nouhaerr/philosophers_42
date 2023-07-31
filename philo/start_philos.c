@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:47:46 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/07/31 21:12:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/08/01 00:51:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	*routine(void *arg)
 	while (1)
 	{
 		is_eating(philo);
+		pthread_mutex_lock(&philo->philo_inf->die_lock);
 		if (philo->philo_inf->t_of_each_ph_must_eat != 0
 			&& philo->count_meals == philo->philo_inf->t_of_each_ph_must_eat)
 		{
-			pthread_mutex_lock(&philo->philo_inf->die_lock);
 			philo->full++;
-			pthread_mutex_unlock(&philo->philo_inf->die_lock);
 		}
+		pthread_mutex_unlock(&philo->philo_inf->die_lock);
 		is_sleeping(philo);
 		is_thinking(philo);
 	}
